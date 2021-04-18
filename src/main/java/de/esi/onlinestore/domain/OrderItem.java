@@ -25,7 +25,7 @@ public class OrderItem implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @NotNull
     @Column(name = "quantity", nullable = false)
@@ -52,11 +52,11 @@ public class OrderItem implements Serializable {
 
 
     //Getter and setter
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -101,7 +101,7 @@ public class OrderItem implements Serializable {
     }
 
 
-    /**@Override
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -110,7 +110,7 @@ public class OrderItem implements Serializable {
             return false;
         }
         return id != null && id.equals(((OrderItem) o).id);
-    }**/
+    }
 
     @Override
     public int hashCode() {

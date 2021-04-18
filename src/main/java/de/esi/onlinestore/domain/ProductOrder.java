@@ -25,7 +25,7 @@ public class ProductOrder implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @NotNull
     @Column(name = "placed_date")
@@ -47,11 +47,11 @@ public class ProductOrder implements Serializable {
     private Customer customer;
 
     //Getter and Setter for all variables in the class
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -137,7 +137,7 @@ public class ProductOrder implements Serializable {
         if (!(o instanceof ProductOrder))
             return false;
         ProductOrder that = (ProductOrder) o;
-        return id == that.id;
+        return id != null && id.equals(((ProductOrder) o).id);
     }
 
     @Override

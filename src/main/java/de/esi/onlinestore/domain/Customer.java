@@ -28,7 +28,7 @@ public class Customer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @NotNull
     @Column(name = "first_name")
@@ -48,11 +48,11 @@ public class Customer implements Serializable {
     //constructor????
 
     // Getter and Setter
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -128,7 +128,7 @@ public class Customer implements Serializable {
         if (!(o instanceof Customer))
             return false;
         Customer customer = (Customer) o;
-        return getId() == customer.getId();
+        return id != null && id.equals(((Customer) o).id);
     }
 
     @Override

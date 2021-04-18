@@ -19,7 +19,7 @@ public class ProductCategory implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @NotNull
     @Column(name = "name")
@@ -32,11 +32,11 @@ public class ProductCategory implements Serializable {
     private Set<Product> products;
 
     //Getter and setter
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -88,7 +88,7 @@ public class ProductCategory implements Serializable {
         return category;
     }
 
-    /**
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -98,7 +98,7 @@ public class ProductCategory implements Serializable {
             return false;
         }
         return id != null && id.equals(((ProductCategory) o).id);
-    } **/
+    }
 
     @Override
     public int hashCode() {
