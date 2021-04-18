@@ -21,8 +21,87 @@ import de.esi.onlinestore.domain.enumeration.OrderItemStatus;
 @Table(name = "order_item")
 public class OrderItem implements Serializable {
 
+    private static final long serialVersionUID = 1L;
 
-    @Override
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @NotNull
+    @Column(name = "quantity", nullable = false)
+    private Integer quantity;
+
+    @NotNull
+    @DecimalMin(value = "0")
+    @Column(name = "total_price", nullable = false)
+    private float totalPrice;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private OrderItemStatus status;
+
+    //@ManyToOne
+    //@JsonIgnore
+    @Lob
+    @Column(name = "product")
+    private Product product;
+
+    @ManyToOne
+    @JoinColumn(name="productItem_id", referencedColumnName="id" )
+    private ProductOrder productOrder;
+
+
+    //Getter and setter
+    public long getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public float getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(float totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public OrderItemStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderItemStatus status) {
+        this.status = status;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public ProductOrder getOrder() {
+        return productOrder;
+    }
+
+    public void setOrder(ProductOrder productOrder) {
+        this.productOrder = productOrder;
+    }
+
+
+    /**@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -31,12 +110,23 @@ public class OrderItem implements Serializable {
             return false;
         }
         return id != null && id.equals(((OrderItem) o).id);
-    }
+    }**/
 
     @Override
     public int hashCode() {
         return 31;
     }
 
+    @Override
+    public String toString(){
+        return "Order item {" +
+                "id=" + getId() +
+                ", quantity='" + getQuantity() + "'" +
+                ", status='" + getStatus() + "'" +
+                ", total price= " + getTotalPrice() + "'" +
+                ", product=" + getProduct() + "'" +
+                ", order=" + getOrder() + "'" +
+                "}";
+    }
 
 }
