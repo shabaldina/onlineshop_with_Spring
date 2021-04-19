@@ -40,7 +40,7 @@ public class ProductOrder implements Serializable {
     private String code;
 
     @OneToMany(mappedBy = "productOrder")
-    private Set<OrderItem> orderItems;
+    private Set<OrderItem> orderItems = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name="productOrder_id", referencedColumnName="id" )

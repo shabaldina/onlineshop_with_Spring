@@ -40,8 +40,6 @@ public class OrderItem implements Serializable {
     @Column(name = "status", nullable = false)
     private OrderItemStatus status;
 
-    //@ManyToOne
-    //@JsonIgnore
     @Lob
     @Column(name = "product")
     private Product product;

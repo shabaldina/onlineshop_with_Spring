@@ -29,7 +29,7 @@ public class ProductCategory implements Serializable {
     private String description;
 
     @OneToMany(mappedBy = "productCategory")
-    private Set<Product> products;
+    private Set<Product> products = new HashSet<>();
 
     //Getter and setter
     public Long getId() {

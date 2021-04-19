@@ -43,9 +43,7 @@ public class Customer implements Serializable {
     private String email;
 
     @OneToMany(mappedBy = "customer")
-    private Set<ProductOrder> orders;
-
-    //constructor????
+    private Set<ProductOrder> orders = new HashSet<>();
 
     // Getter and Setter
     public Long getId() {
