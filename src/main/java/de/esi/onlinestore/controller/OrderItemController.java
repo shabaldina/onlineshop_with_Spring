@@ -1,7 +1,6 @@
 package de.esi.onlinestore.controller;
 
 import de.esi.onlinestore.domain.OrderItem;
-import de.esi.onlinestore.domain.Product;
 import de.esi.onlinestore.exceptions.BadRequestException;
 import de.esi.onlinestore.exceptions.ResourceNotFoundException;
 import de.esi.onlinestore.repository.OrderItemRepository;

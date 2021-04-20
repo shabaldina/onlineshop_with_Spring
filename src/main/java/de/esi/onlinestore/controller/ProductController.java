@@ -47,8 +47,8 @@ public class ProductController {
 	@PostMapping("/products")
 	public ResponseEntity<Product> createProduct(@Valid @RequestBody Product product) throws URISyntaxException, BadRequestException {
 		log.info("REST request to save Product : {}", product);
-		if ( product.getId() == null) {
-			throw new BadRequestException("A new product cannot be added, ID null");
+		if ( product.getId() != null) {
+			throw new BadRequestException("A new product cannot be added, ID exists");
 		}
 		Product result = productRepository.save(product);
 		return ResponseEntity.created(new URI("/api/products/" + result.getId()))
@@ -57,20 +57,43 @@ public class ProductController {
 
 	//get product by id
 	@GetMapping("/products/{id}")
-	public ResponseEntity<Product> getProduct(@PathVariable Long id) {
+	public ResponseEntity<Product> getProduct(@PathVariable Long id) throws ResourceNotFoundException {
 		log.info("REST request to get Product : {}", id);
+		if(!productRepository.existsById(id)){
+			throw new ResourceNotFoundException("id not found");
+		}
 		Optional<Product> product = productRepository.findById(id);
 		Product result = product.get();
 		return ResponseEntity.ok()
 				.body(result);
 	}
 
-	//overwrite product by id
+	//overwrite product
 	@PutMapping("/products")
-	public ResponseEntity<Product> updateProduct(@Valid @RequestBody Product product) throws URISyntaxException, BadRequestException {
+	public ResponseEntity<Product> updateProduct(@Valid @RequestBody Product product)
+			throws BadRequestException, ResourceNotFoundException {
 		log.info("REST request to update Product : {}", product);
 		if (product.getId() == null) {
 			throw new BadRequestException("Invalid id");
+		}
+		if(!productRepository.existsById(product.getId())){
+			throw new ResourceNotFoundException("id not found");
+		}
+		Product result = productRepository.save(product);
+		return ResponseEntity.ok()
+				.body(result);
+	}
+
+	//overwrite product by id
+	@PutMapping("/products/{id}")
+	public ResponseEntity<Product> updateProduct(@PathVariable Long id, @Valid @RequestBody Product product)
+			throws BadRequestException, ResourceNotFoundException {
+		log.info("REST request to update Product : {}", product);
+		if (product.getId() == null) {
+			throw new BadRequestException("Invalid id");
+		}
+		if(!productRepository.existsById(id)){
+			throw new ResourceNotFoundException("id not found");
 		}
 		Product result = productRepository.save(product);
 		return ResponseEntity.ok()
@@ -79,18 +102,14 @@ public class ProductController {
 
 	//delete product by id
 	@DeleteMapping("/products/{id}")
-	public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+	public ResponseEntity<Void> deleteProduct(@PathVariable Long id) throws ResourceNotFoundException {
 		log.info("REST request to delete Product : {}", id);
+		if(!productRepository.existsById(id)){
+			throw new ResourceNotFoundException("id not found");
+		}
 		productRepository.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}
-
-
-
-
-
-
-
 
 }
 
