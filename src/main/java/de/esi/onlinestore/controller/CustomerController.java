@@ -1,14 +1,10 @@
 package de.esi.onlinestore.controller;
 
 import de.esi.onlinestore.domain.Customer;
-import de.esi.onlinestore.domain.Product;
-import de.esi.onlinestore.domain.ProductOrder;
 import de.esi.onlinestore.exceptions.BadRequestException;
 import de.esi.onlinestore.exceptions.ResourceNotFoundException;
 import de.esi.onlinestore.repository.CustomerRepository;
 
-
-import de.esi.onlinestore.repository.ProductOrderRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +28,7 @@ public class CustomerController {
 	private final CustomerRepository customerRepository;
 
 	public CustomerController(CustomerRepository customerRepository){
+
 		this.customerRepository = customerRepository;
 	}
 
@@ -48,8 +44,8 @@ public class CustomerController {
 	@PostMapping("/customers")
 	public ResponseEntity<Customer> createCustomer(@Valid @RequestBody Customer customer) throws BadRequestException, URISyntaxException {
 		log.info("REST request to create customer : {}", customer);
-		if (customer.getId() == null){
-			throw new BadRequestException("New customer can not be added - id is empty");
+		if (customer.getId() != null){
+			throw new BadRequestException("New customer can not be added - id exists");
 		}
 		Customer result = customerRepository.save(customer);
 		return ResponseEntity.created(new URI("/api/customers/" + result.getId())).body(result);
@@ -57,30 +53,54 @@ public class CustomerController {
 
 	//Get customer by id
 	@GetMapping("/customers/{id}")
-	public ResponseEntity<Customer> getCustomer(@PathVariable Long id){
+	public ResponseEntity<Customer> getCustomer(@PathVariable Long id) throws ResourceNotFoundException {
 		log.info("REST request to get customer : {}", id);
+		if(!customerRepository.existsById(id)){
+			throw new ResourceNotFoundException("id not found");
+		}
 		Optional<Customer> customer = customerRepository.findById(id);
 		Customer result = customer.get();
 		return ResponseEntity.ok().body(result);
 
 	}
 
-	//Overwrite customer by id
+	//Overwrite customer
 	@PutMapping("/customers")
-	public ResponseEntity<Customer> updateCustomer(@Valid @RequestBody Customer customer) throws URISyntaxException, BadRequestException {
+	public ResponseEntity<Customer> updateCustomer(@Valid @RequestBody Customer customer)
+			throws BadRequestException, ResourceNotFoundException {
 		log.info("REST request to update customer : {}", customer);
 		if (customer.getId() == null) {
 			throw new BadRequestException("Invalid id");
+		}
+		if(!customerRepository.existsById(customer.getId())){
+			throw new ResourceNotFoundException("id not found");
 		}
 		Customer result = customerRepository.save(customer);
 		return ResponseEntity.ok().body(result);
 	}
 
+	//Overwrite customer by id
+	@PutMapping("/customers/{id}")
+	public ResponseEntity<Customer> updateCustomer(@PathVariable Long id, @Valid @RequestBody Customer customer)
+			throws BadRequestException, ResourceNotFoundException {
+		log.info("REST request to update customer : {}", customer);
+		if (customer.getId() == null) {
+			throw new BadRequestException("Invalid id");
+		}
+		if(!customerRepository.existsById(id)){
+			throw new ResourceNotFoundException("id not found");
+		}
+		Customer result = customerRepository.save(customer);
+		return ResponseEntity.ok().body(result);
+	}
 
 	//Delete customer by id
 	@DeleteMapping("/customers/{id}")
-	public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+	public ResponseEntity<Void> deleteCustomer(@PathVariable Long id) throws ResourceNotFoundException {
 		log.info("REST request to delete customer : {}", id);
+		if(!customerRepository.existsById(id)){
+			throw new ResourceNotFoundException("id not found");
+		}
 		customerRepository.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}
