@@ -36,15 +36,16 @@ public class ProductOrder implements Serializable {
     private OrderStatus status;
 
     @NotNull
-    @Column(name="ordre_code")
+    @Column(name="order_code")
     private String code;
-
-    @OneToMany(mappedBy = "productOrder")
-    private Set<OrderItem> orderItems = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name="productOrder_id", referencedColumnName="id" )
+    @JsonIgnore
     private Customer customer;
+
+    @OneToMany(mappedBy = "order")
+    private Set<OrderItem> orderItems = new HashSet<>();
 
     //Getter and Setter for all variables in the class
     public Long getId() {

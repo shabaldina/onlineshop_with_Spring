@@ -34,7 +34,7 @@ public class OrderItem implements Serializable {
     @NotNull
     @DecimalMin(value = "0")
     @Column(name = "total_price", nullable = false)
-    private float totalPrice;
+    private Float totalPrice;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
@@ -46,7 +46,8 @@ public class OrderItem implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="productItem_id", referencedColumnName="id" )
-    private ProductOrder productOrder;
+    @JsonIgnore
+    private ProductOrder order;
 
 
     //Getter and setter
@@ -66,11 +67,11 @@ public class OrderItem implements Serializable {
         this.quantity = quantity;
     }
 
-    public float getTotalPrice() {
+    public Float getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(float totalPrice) {
+    public void setTotalPrice(Float totalPrice) {
         this.totalPrice = totalPrice;
     }
 
@@ -91,11 +92,11 @@ public class OrderItem implements Serializable {
     }
 
     public ProductOrder getOrder() {
-        return productOrder;
+        return order;
     }
 
-    public void setOrder(ProductOrder productOrder) {
-        this.productOrder = productOrder;
+    public void setOrder(ProductOrder order) {
+        this.order = order;
     }
 
 
@@ -122,8 +123,6 @@ public class OrderItem implements Serializable {
                 ", quantity='" + getQuantity() + "'" +
                 ", status='" + getStatus() + "'" +
                 ", total price= " + getTotalPrice() + "'" +
-                ", product=" + getProduct() + "'" +
-                ", order=" + getOrder() + "'" +
                 "}";
     }
 

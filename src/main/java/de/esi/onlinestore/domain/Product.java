@@ -50,6 +50,7 @@ public class Product implements Serializable {
     private String imageContentType;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name="product_id", referencedColumnName="id" )
     ProductCategory productCategory;
 
