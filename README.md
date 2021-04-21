@@ -1,5 +1,8 @@
 # Online shop with Springboot
+
 REST API for simple onlineshop with Springboot
+
+No GUI availiable for time beeing 
 
 ### Availiable domains:
 - Customer
