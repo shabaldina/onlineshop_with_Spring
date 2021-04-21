@@ -14,7 +14,7 @@ No GUI availiable for time beeing.
 - OrderItem
 
 ### REST API:
-#### Call for customers:
+#### Calls for customers:
 - GET on /api/customers 
 - GET on /api/customers/{id}
 - PUT on /api/customers
@@ -22,7 +22,7 @@ No GUI availiable for time beeing.
 - POST on /api/customers/{id}
 - DELETE on /api/customers/{id}
 
-#### Call for products:
+#### Calls for products:
 - GET on /api/products 
 - GET on /api/products/{id}
 - PUT on /api/products 
@@ -30,3 +30,4 @@ No GUI availiable for time beeing.
 - POST on /api/products/{id} 
 - DELETE on /api/products/{id} 
 
+#### Calls for product category (product-categories), product order (product-order), oder item (order-item) work same way
