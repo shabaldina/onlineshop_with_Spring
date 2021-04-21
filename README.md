@@ -1,10 +1,12 @@
 # Online shop with Springboot
 
-REST API for simple onlineshop with Springboot
+REST API for simple onlineshop with Springboot.
 
-No GUI availiable for time beeing 
+The API is intended to support activities in the context of online commerce, e.g. create, modify or delete orders. It's possible to register customers or modify data of existing customers. Furthermore, the API supports the definition of products and the assignment of products to product categories.
 
-### Availiable domains:
+No GUI availiable for time beeing.
+
+### Domains:
 - Customer
 - Product
 - ProductOrder
@@ -12,7 +14,7 @@ No GUI availiable for time beeing
 - OrderItem
 
 ### REST API:
-#### For customers:
+#### Call for customers:
 - GET on /api/customers 
 - GET on /api/customers/{id}
 - PUT on /api/customers
@@ -20,10 +22,11 @@ No GUI availiable for time beeing
 - POST on /api/customers/{id}
 - DELETE on /api/customers/{id}
 
-#### For products:
+#### Call for products:
 - GET on /api/products 
 - GET on /api/products/{id}
 - PUT on /api/products 
 - PUT on /api/products/{id} 
 - POST on /api/products/{id} 
 - DELETE on /api/products/{id} 
+
