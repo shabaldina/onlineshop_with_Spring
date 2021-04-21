@@ -115,7 +115,6 @@ public class Customer implements Serializable {
                 ", first name=" + getFirstName() +
                 ", last name=" + getLastName() +
                 ", email=" + getEmail() +
-                ", customer orders:" + getOrders() +
                 "}";
     }
 
