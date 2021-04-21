@@ -9,6 +9,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * Interprise Software Infrastructure
+ * Prüfungsleistung: Entwicklung eines REST-API für ein Online-Geschäft
+ * Development of a simple REST-API for online shop
+ * Author: Lidiia Shabaldina
+ * Date: April 2021
+ **/
+
 
 @SpringBootApplication
 public class OnlineStoreApp implements CommandLineRunner {
