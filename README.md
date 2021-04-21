@@ -10,17 +10,17 @@ REST API for simple onlineshop with Springboot
 
 ### REST API:
 #### For customers:
-GET on /api/customers <br\>
-GET on /api/customers/{id} <br\>
-PUT on /api/customers <br\>
-PUT on /api/customers/{id} <br\>
-POST on /api/customers/{id} <br\>
-DELETE on /api/customers/{id} <br\>
+- GET on /api/customers 
+- GET on /api/customers/{id}
+- PUT on /api/customers
+- PUT on /api/customers/{id}
+- POST on /api/customers/{id}
+- DELETE on /api/customers/{id}
 
 #### For products:
-GET on /api/products <br\>
-GET on /api/products/{id} <br\>
-PUT on /api/products <br\>
-PUT on /api/products/{id} <br\>
-POST on /api/products/{id} <br\>
-DELETE on /api/products/{id} <br\>
+- GET on /api/products 
+- GET on /api/products/{id}
+- PUT on /api/products 
+- PUT on /api/products/{id} 
+- POST on /api/products/{id} 
+- DELETE on /api/products/{id} 
